@@ -1,0 +1,64 @@
+:root {
+    --color-fondo-login: #84BFD7;
+    --color-login-txt: rgba(104, 100, 100, .65);
+    --color-boton-login: rgba(112, 112, 112, .5);
+    --color-btn-txt: #FFFFFF;
+    --sombra-login-txt: #1EA3D9;
+}
+
+/* Reseteo*/
+
+body{
+    overflow: hidden;
+}
+
+a{
+    text-decoration: none;
+}
+
+/*Estilos propios*/
+
+.login{
+    background: var(--color-fondo-login);
+    opacity: 0.65;
+}
+
+.grande{
+    transform: scale(1.23, 1.1);
+}
+
+.caja{
+    width: 50%;
+}
+
+.ini{
+    font-size: 60px;
+    color: var(--color-btn-txt);
+    text-shadow: -7px 2px 6px var(--sombra-login-txt);
+    
+}
+
+.campo{
+    background-color: var(--color-btn-txt);
+    color: var(--color-login-txt);
+    box-shadow: -2px 5px 7px 0px rgba(0,0,0 , .5);
+    border-radius: 29px;
+    font-size: 22px;
+}
+
+.ingre{
+    background-color: var(--color-boton-login);
+    border-radius: 20px;
+    font-size: 18px;
+    padding: 5px 25px;
+    border: 0px;
+}
+
+.sel{
+    background-color: var(--color-btn-txt);
+    
+}
+.ven{
+    background-image: url("../img/Grupo 16.png");
+    background-size: cover;
+}
