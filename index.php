@@ -1,49 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/style.css">
-    <title>PLASITA</title>
-</head>
-<body>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col" style="padding: 0px;">
-                <img class="img-fluid grande" src="img/Grupo 33.png" alt="">
-            </div>
-            <div class="col login d-flex align-items-center">
-                <div class="container d-flex justify-content-center">
-                    <div class="caja">
-                        <p class="text-center ini">INICIAR </BR> SESION</p>
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control text-center campo" aria-label="Text input with segmented dropdown button" placeholder="D N I">
-                            <div class="input-group-prepend">
-                              <button type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split sel" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="sr-only">Toggle Dropdown</span>
-                              </button>
-                              <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#">VENDEDOR</a>
-                                <a class="dropdown-item" href="#">ADMINISTRADOR</a>
-                              </div>
-                            </div>
-                          </div>
+<?php
+    include_once 'includes/user.php';
+    include_once 'includes/userSession.php';
 
-                        <div class="input-group mb-3">
-                            <input type="password" class="form-control text-center campo" placeholder="CONTRASEÑA" aria-label="Username" aria-describedby="basic-addon1">
-                        </div>
-                        <div class="text-center">
-                            <button type="button" class="btn btn-secondary ingre">ENTRAR</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-    <script src="js/bos.js"></script>
-</body>
-</html>
+    $userSession = new userSession();
+    $user = new User();
+
+    if(isset($_SESSION['dni'])){
+        //echo "hay session";
+        $user->setUser($userSession->getCurrentUser());
+        include_once 'includes/venta.php';
+    }else if(isset($_POST['dni']) && isset($_POST['password'])){
+        //echo "Validacion de login";
+        $dniForm = $_POST['dni'];
+        $passForm = $_POST['password'];
+
+        if($user->validar($dniForm,$passForm)){
+            //echo "acceso correcto";
+            $userSession->setCurrentUser($dniForm);
+            $user->setUser($dniForm);
+            include_once 'includes/venta.php';
+        }else{
+            //echo "acceso incorrecto";
+            $error="error de contraseña";
+            include_once 'includes/login.php';
+        }
+    }else{
+        //echo "login";
+        include_once 'includes/login.php';
+    }
+?>
