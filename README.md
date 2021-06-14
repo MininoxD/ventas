@@ -2,8 +2,6 @@ Titulo: Sistema de Ventas
 <br/>
 Descripcion: Sistema de ventas MultiPlataforma
 <br/>
-Autor: Luis Enrique
-<br/>
 Creado:  2019 Noviembre
 <br/>
 Stack: PHP,HTML,CSS,BOOTSTRAP,JQuery
